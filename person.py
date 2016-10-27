@@ -54,3 +54,31 @@ pList.sort()
 print 'The people in pList are:'
 for p in pList:
    print '  ' + str(p)
+
+class MITPerson(Person):
+    nextIdNum = 0
+    def __init__(self, name):
+        Person.__init__(self, name)
+        self.idNum = MITPerson.nextIdNum
+        MITPerson.nextIdNum += 1
+    def getIdNum(self):
+        return self.idNum
+    def __lt__(self, other):
+        return self.idNum < other.idNum
+    def isStudent(self):
+        return type(self)==UG or type(self)==G
+
+p1 = MITPerson('Barbara Beaver')
+print p1, p1.getIdNum()
+p2 = MITPerson('Sue Yuan')
+print p2, p2.getIdNum()
+p3 = MITPerson('Sue Yuan')
+print p3, p3.getIdNum()
+p4 = Person('Sue Yuan')
+print 'p1 < p2 =', p1 < p2
+print 'p3 < p2 =', p3 < p2
+print '_lt__(p1, p2) =', Person.__lt__(p1, p2)
+print 'p1 == p4 =', p1 == p4
+print 'p4 < p3 =', p4 < p3
+#Won't work because p4 is a Person not an MITPerson and cannot compare to a non-existing id.
+##print 'p3 < p4 =', p3 < p4
