@@ -82,3 +82,24 @@ print 'p1 == p4 =', p1 == p4
 print 'p4 < p3 =', p4 < p3
 #Won't work because p4 is a Person not an MITPerson and cannot compare to a non-existing id.
 ##print 'p3 < p4 =', p3 < p4
+
+class UG(MITPerson):
+    def __init__(self, name):
+        MITPerson.__init__(self, name)
+        self.year = None
+    def setYear(self, year):
+        if year > 5:
+            raise OverflowError('Too many')
+        self.year = year
+    def getYear(self):
+        return self.year
+
+ug1 = UG('Jane Doe')
+ug2 = UG('Jane Doe')
+p3 = MITPerson('Sue Yuan')
+ug1.setYear(2)
+print ug1.getYear()
+print ug1
+print ug1 < p3
+print ug2 < ug1
+print ug1 == ug2
