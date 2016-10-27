@@ -103,3 +103,9 @@ print ug1
 print ug1 < p3
 print ug2 < ug1
 print ug1 == ug2
+
+class G(MITPerson):
+    pass
+
+g1 = G('Mitch Peabody')
+print 'Graduate Student', type(g1) == G
