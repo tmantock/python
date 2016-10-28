@@ -109,3 +109,61 @@ class G(MITPerson):
 
 g1 = G('Mitch Peabody')
 print 'Graduate Student', type(g1) == G
+
+    def __init__(self, number):
+        self.number = number
+        self.students = []
+    def addStudent(self, who):
+        if not who.isStudent():
+            raise TypeError('Not a student')
+        if who in self.students:
+            raise ValueError('Duplicate student')
+        self.students.append(who)
+    def remStudent(self, who):
+        try:
+            self.students.remove(who)
+        except:
+            print str(who) + ' not in ' + self.number
+    def allStudents(self):
+        for s in self.students:
+            yield s
+    def ugs(self):
+        indx = 0
+        while indx < len(self.students):
+            if type(self.students[indx]) == UG:
+                yield self.students[indx]
+            indx += 1
+
+m1 = MITPerson('Barbara Beaver')            
+ug1 = UG('Jane Doe')
+ug2 = UG('John Doe')
+g1 = G('Mitch Peabody')
+g2 = G('Ryan Jackson')
+g3 = G('Jenny Liu')
+print ''
+SixHundred = CourseList('6.00')
+SixHundred.addStudent(ug1)
+SixHundred.addStudent(g1)
+SixHundred.addStudent(ug2)
+#SixHundred.addStudent(m1)
+SixHundred.remStudent(g3)
+print 'Students'
+for s in SixHundred.allStudents():
+   print s
+print 'Students Squared'
+for s in SixHundred.allStudents():
+   for s1 in SixHundred.allStudents():
+       print s, s1
+print 'Change Class test'
+for s in SixHundred.allStudents():
+   print s
+   if s == ug1:
+       SixHundred.remStudent(ug2)
+       SixHundred.addStudent(g2)
+print 'Undergraduates'
+for u in SixHundred.ugs():
+   print u
+L = [1,2,3]
+for e in L:
+   print e
+   L = []
