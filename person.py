@@ -126,15 +126,17 @@ print 'Graduate Student', type(g1) == G
             print str(who) + ' not in ' + self.number
     def allStudents(self):
         for s in self.students:
+            #yield is a generator - a function that remebers the point in the function body where it last returned plus the local variables
             yield s
     def ugs(self):
         indx = 0
         while indx < len(self.students):
             if type(self.students[indx]) == UG:
+                #See above comment
                 yield self.students[indx]
             indx += 1
 
-m1 = MITPerson('Barbara Beaver')            
+m1 = MITPerson('Barbara Beaver')
 ug1 = UG('Jane Doe')
 ug2 = UG('John Doe')
 g1 = G('Mitch Peabody')
