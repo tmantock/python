@@ -128,7 +128,7 @@ def hit():
     global playing,chip_pool,deck,player_hand,dealer_hand,result,bet
 
     if playing:
-        if player.hand.calc_val() <= 21:
+        if player_hand.calc_val() <= 21:
             player_hand.card_add(deck.deal())
 
         print "player hand is %s" %player_hand
