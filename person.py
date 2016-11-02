@@ -22,13 +22,21 @@ class Person(object):
         #assumes that self's birthday has been set
         #returns self's current age in days
         assert self.birthday != None
-        return (datetime.date.today() - self.birthday).days
+        days = (datetime.date.today() - self.birthday).days
+        #Roughly 365 days in a year not including leap years
+        return days/365
     def __lt__(self, other):
         #return True if self's name is lexicographically greater
         #than other's name, and False otherwise
         if self.lastName == other.lastName:
             return self.name < other.name
         return self.lastName < other.lastName
+    def __gt__(self,other):
+        #return True if self's name is lexicographically lesser
+        #than other's name, and False otherwise
+        if self.lastName == other.lastName:
+            return self.name > other.name
+        return self.lastName > other.lastName
     def __str__(self):
         #return self's name
         return self.name
@@ -46,6 +54,7 @@ print her.getAge()
 print him.getAge()
 print him < her
 print me < her
+print me > her
 pList = [me, him, her]
 print 'The people in pList are:'
 for p in pList:
@@ -110,6 +119,7 @@ class G(MITPerson):
 g1 = G('Mitch Peabody')
 print 'Graduate Student', type(g1) == G
 
+class CourseList(object):
     def __init__(self, number):
         self.number = number
         self.students = []
@@ -169,3 +179,4 @@ L = [1,2,3]
 for e in L:
    print e
    L = []
+print SixHundred
