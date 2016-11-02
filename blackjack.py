@@ -7,7 +7,7 @@ restart_phrase = "Press 'd' to deal teh cards again, or press 'q' to quit"
 
 suits = ('H','D','C','S')
 ranking = ('A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K')
-card_val = {'A':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'J':10, 'Q':10, 'K':10}
+card_val = {'A': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'J': 10, 'Q': 10, 'K': 10}
 
 class Card(object):
     def __init__(self,suit,rank):
@@ -21,7 +21,7 @@ class Card(object):
         return self.suit
 
     def grab_rank(self):
-        retrun self,rank
+        return self.rank
 
     def draw(self):
         print self.suit + self.rank
@@ -95,10 +95,10 @@ def make_bet():
         if bet_comp >= 1 and bet_comp <= chip_pool:
             bet = bet_comp
         else:
-            print "Invalid bet, you only have %s remaining" %chip_pool
+            print "Invalid bet, you only have %s remaining" % chip_pool
 
 def deal_cards():
-    global result,playing,deck,player_hand,dealer_hand,chip_pool,bet
+    global result, playing, deck, player_hand, dealer_hand, chip_pool, bet
 
     deck = Deck()
 
@@ -119,7 +119,7 @@ def deal_cards():
 
     if playing == True:
         print 'Fold, Sorry'
-        chip_pool -+ bet
+        chip_pool -= bet
 
     playing = True
     game_step()
