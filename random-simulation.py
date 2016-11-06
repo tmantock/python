@@ -1,4 +1,3 @@
-
 import random
 
 class Location(object):
@@ -56,17 +55,18 @@ def walk(f, d, numSteps):
     return(start.distFrom(f.getLoc(d)))
 
 def simWalks(numSteps, numTrials):
-    homer = Drunk('Homer Simpson')
+    homer = Drunk('Homer')
     origin = Location(0, 0)
     distances = []
     for t in range(numTrials):
         f = Field()
         f.addDrunk(homer, origin)
-        distances.append(walk(f, homer, numTrials))
+        distances.append(walk(f, homer, numSteps))
     return distances
 
 def drunkTest(numTrials):
-    for numSteps in [0,1]:
+    #for numSteps in [0, 1]:
+    for numSteps in [10, 100, 1000, 10000, 100000]:
         distances = simWalks(numSteps, numTrials)
         print 'Random walk of ' + str(numSteps) + ' steps'
         print '  Mean =', sum(distances)/len(distances)
