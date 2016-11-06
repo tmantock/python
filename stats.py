@@ -114,7 +114,27 @@ def makePlots(nf1, nf2, nt):
 
 #L = [1,2,3,3,3,4]
 #pylab.hist(L, bins = 6)
-makePlots(100, 1000, 100000)
-pylab.show()
+#makePlots(100, 1000, 100000)
+#pylab.show()
 
 """Normal distribution peaks at the mean and falls if symmetrically"""
+
+def poll(n, p):
+    votes = 0.0
+    for i in range(n):
+        if random.random() < p/100.0:
+            votes += 1
+    return votes
+
+def testErr(n = 1000, p = 46.0, numTrials = 1000):
+    results = []
+    for t in range(numTrials):
+        results.append(poll(n, p))
+    print 'std = ' + str((stdDev(results)/n)*100) + '%'
+    results = pylab.array(results)/n
+    pylab.hist(results)
+    pylab.xlabel('Fraction of Votes')
+    pylab.ylabel('Number of Polls')
+
+testErr()
+pylab.show()
