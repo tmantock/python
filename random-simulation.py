@@ -108,17 +108,30 @@ import pylab
 # pylab.savefig('secondSaved')
 # pylab.show()
 
-principal = 10000 #initial investment
-interestRate = 0.05
-years = 20
-values = []
-for i in range(years + 1):
-    values.append(principal)
-    principal += principal*interestRate
-pylab.plot(values)
+# principal = 10000 #initial investment
+# interestRate = 0.05
+# years = 20
+# values = []
+# for i in range(years + 1):
+#     values.append(principal)
+#     principal += principal*interestRate
+# pylab.plot(values)
+#
+# pylab.title('5% Growth, Compounded Annually')
+# pylab.xlabel('Years of Compounding')
+# pylab.ylabel('Value of Principal ($)')
+#
+# pylab.show()
 
-pylab.title('5% Growth, Compounded Annually')
-pylab.xlabel('Years of Compounding')
-pylab.ylabel('Value of Principal ($)')
+def checkPascal(numTrials = 100000):
+    yes = 0.0
+    for i in range(numTrials):
+        for j in range(24):
+            d1 = rollDie()
+            d2 = rollDie()
+            if d1 == 6 and d2 == 6:
+                yes += 1
+                break
+    print 'Probability of losing = ' + str(1.0 - yes/numTrials)
 
-pylab.show()
+checkPascal()
