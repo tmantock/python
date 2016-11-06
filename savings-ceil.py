@@ -1,13 +1,15 @@
 import math
 
 class Savings(object):
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, user):
+        self.user = user
         self. purchases = {}
-    def Purchase (self, name, price):
+        self.totalSavings = 0;
+    def Purchase (self, product, price):
         assert type(price) == float
-        self.purchases[name] = math.ceil(price) - price
-        return self.purchases[name]
+        self.purchases[product] = math.ceil(price) - price
+        self.totalSavings += sef.purchases[product]
+        return self.purchases[product]
 
-Mac = Savings("Mac")
+matt = Savings("Matt")
 print Mac.Purchase("Mac", 3253.23)
