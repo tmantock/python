@@ -190,4 +190,15 @@ def flipPlot(minExp, maxExp):
     pylab.semilogx()
 
 flipPlot(4, 20)
-pylab.show()
+#pylab.show()
+
+import math
+
+def stdDev(X):
+    mean = sum(X)/float(len(X))
+    tot = 0.0
+    for x in X:
+        tot += (x - mean)**2
+    return math.sqrt(tot/len(X))
+
+print stdDev([1,2,3,4,5,6,7,8,9,10])
