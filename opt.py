@@ -65,3 +65,5 @@ def testGreedys(maxWeight = 20):
     testGreedy(Items, maxWeight, weightInverse)
     print 'Use greedy by density to fill a knapsack of size', maxWeight
     testGreedy(Items, maxWeight, density)
+
+testGreedys()
