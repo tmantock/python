@@ -17,7 +17,7 @@ class CSVReader(object):
                     if header_line in self.fileHeaders:
                         file_number += 1
                 ###################################################################
-                of = open('output' + str(file_number) + '.txt', 'w')
+                of = open('output' + str(file_number) + '.txt', 'a')
                 self.fileHeaders.append(header_line)
                 for line in file.readlines():
                     of.write(line)
