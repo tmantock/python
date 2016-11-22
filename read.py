@@ -14,7 +14,7 @@ class CSVReader(object):
                 #purpose is to create a new file if the headers do not match for a csv
                 file_number = 1
                 if(len(self.header_line) > 0):
-                    if header_line in self.header_line:
+                    if header_line in self.fileHeaders:
                         file_number += 1
                 ###################################################################
                 of = open('output' + str(file_number) + '.txt', 'w')
