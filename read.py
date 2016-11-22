@@ -53,17 +53,24 @@ class WriteCSV(Write):
                 print filename + " has printed to " + output_filename + "."
                 WriteCSV.numIters += 1
 
-inUse = True
 
-while inUse:
-    #tested with local directories. File should be entered with a trailing / ex: csv/
-    directory = raw_input("Which directory would you like to use? ")
-    filetype = raw_input("Which file type would you like to use? ")
+def main():
+    inUse = True
 
-    if filetype == 'csv':
-        writer = WriteCSV(directory, filetype)
-        writer.readToWriteFiles()
-    else:
-        writer = Write(directory, filetype)
-        writer.readToWriteFiles()
-    inUse = False
+    while inUse:
+        #tested with local directories. File should be entered with a trailing / ex: csv/
+        directory = raw_input("Which directory would you like to use? ")
+        filetype = raw_input("Which file type would you like to use? ")
+
+        if filetype == 'csv':
+            writer = WriteCSV(directory, filetype)
+            writer.readToWriteFiles()
+        elif filetype.lower().startswith('e') or directory.lower().starswith('e'):
+            inUse = False
+        else:
+            writer = Write(directory, filetype)
+            writer.readToWriteFiles()
+        inUse = False
+
+if __name__ == '__main__':
+    main()
