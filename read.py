@@ -27,6 +27,7 @@ class CSVReader(object):
 inUse = True
 
 while inUse:
+    #tested with local directories. File should be entered with a trailing / ex: csv/
     directory = raw_input("Which directory would you like to use? ")
     filetype = raw_input("Which file type would you like to use? ")
 
