@@ -1,5 +1,5 @@
 import os
-
+#plan for restructuring for inheritance for different file types
 class CSVReader(object):
     def __init__(self, directory, filetype):
         self.directory = directory
