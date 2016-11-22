@@ -10,10 +10,13 @@ class CSVReader(object):
             if filename.endswith('.' + str(self.filetype)):
                 file = open(str(self.directory) + filename, 'r')
                 header_line = file.readline()
+                #incomplete portion
+                #purpose is to create a new file if the headers do not match for a csv
                 file_number = 1
                 if(len(self.header_line) > 0):
                     if header_line in self.header_line:
-                        file_number++
+                        file_number += 1
+                ###################################################################
                 of = open('output' + str(file_number) + '.txt', 'w')
                 self.fileHeaders.append(header_line)
                 for line in file.readlines():
