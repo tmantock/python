@@ -1,16 +1,25 @@
 import os
-#plan for restructuring for inheritance for different file types
+
 class Write(object):
     def __init__(self, directory, filetype):
         self.directory = directory
         self.filetype = filetype
     def readToWriteFiles(self):
+        #iterate over each file in the directory
         for filename in os.listdir(str(self.directory)):
+            #check if the file is the proper file type
             if filename.endswith('.' + str(self.filetype)):
+                #open the file
                 file = open(str(self.directory) + filename, 'r')
+                #create an output file
                 output_file = open('output.txt','a')
+                #iterate over each line in the file
                 for line in file.readlines():
+                    #copy the lines from the reading file to the output file
                     output_file.write(line)
+                #write a new line at the end of the last line of the file for future concatenation
+                output_file.write('\n')
+                #close each file
                 file.close()
                 output_file.close()
 
