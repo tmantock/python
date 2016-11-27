@@ -19,10 +19,10 @@ class Item(object):
 def buildManyItems(numItems, maxVal, maxWeight):
     Items = []
     for i in range(numItems):
-##        Items.append(Item(str(i), random.randrange(1, maxVal),
-##                          random.randrange(1, maxWeight)))
         Items.append(Item(str(i), random.randrange(1, maxVal),
-             random.randrange(1, maxWeight)*random.random()))
+                          random.randrange(1, maxWeight)))
+#        Items.append(Item(str(i), random.randrange(1, maxVal),
+#             random.randrange(1, maxWeight)*random.random()))
 
     return Items
 
@@ -115,3 +115,5 @@ def test(maxVal = 10, maxWeight = 10, runSlowly = False):
             elapsed = time.time() - startTime
             funcName = func.__name__
             print numItems, len(toTake), val, funcName, numCalls, elapsed
+
+test()
