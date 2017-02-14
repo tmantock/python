@@ -20,6 +20,19 @@ def primelist(limit):
 
     return primes
 
-primes = primelist(100)
 
-print(primes)
+def isPrime(num):
+    if(num < 2):
+        return False
+    
+    sqrt = math.floor(math.sqrt(num))
+
+    for i in range(2, sqrt + 1):
+        if(num % i == 0):
+            return False
+        
+    return True
+
+
+print(primelist(100))
+print(isPrime(22))
