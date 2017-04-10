@@ -17,7 +17,7 @@ for sheet in wb.sheets():
     # Loop over each column in the row and add data to the dictionary
     for col in range(number_of_columns):
       value = sheet.cell(row, col).value
-      dict['headername'] = value
+      dict['headername' + str(col)] = value
     
     # Append row data
     # data will look like this as data is added to the list [{"name": John, "age": 90}, {"name": Joe, "age": 89}]
