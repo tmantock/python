@@ -9,9 +9,7 @@ for sheet in wb.sheets():
   number_of_columns = sheet.ncols
   
   for row in range(number_of_rows):
-    #Empty dictionary - Key: Value pair - Ex dict = {'name': John, 'age': 50}
-    # access value like dict['name']
-    # set value like dict['name'] = "Jane"
+    # Add values to this array
     sub = []
     
     # Loop over each column in the row and add data to the dictionary
@@ -19,8 +17,7 @@ for sheet in wb.sheets():
       value = str((sheet.cell(row, col).value))
       sub.append(value)
     
-    # Append row data
-    # data will look like this as data is added to the list [{"name": John, "age": 90}, {"name": Joe, "age": 89}]
+    # Append sub array to data array to create a multi-dimensioanl array
     data.append(sub)
     
     # Alternatively, you can do something with the data here instead of appending
