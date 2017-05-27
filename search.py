@@ -7,10 +7,9 @@ def binary_search(array, n):
 
     if n == array[mid]:
         return array[mid]
-
-    if n > array[mid]:
+    elif n > array[mid]:
         b = array[mid:]
-    if n < array[mid]:
+    elif n < array[mid]:
         b = array[:mid]
 
     return binary_search(b, n)
