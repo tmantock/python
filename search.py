@@ -3,7 +3,7 @@
 
 
 def binary_search(haystack, needle):
-    if needle > haystack[len(haystack) - 1] or needle < haystack[0]:
+    if needle > haystack[-1] or needle < haystack[0]:
         return "Out of Bounds"
 
     mid = len(haystack) / 2
@@ -19,4 +19,4 @@ def binary_search(haystack, needle):
 
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20]
 
-print binary_search(arr, 17)
+print binary_search(arr, 18)
