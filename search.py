@@ -11,10 +11,9 @@ def binary_search(haystack, needle):
     if needle == haystack[mid]:
         return haystack[mid]
     elif needle > haystack[mid]:
-        h = haystack[mid:]
+        return binary_search(haystack[mid:], needle)
     elif needle < haystack[mid]:
-        h = haystack[:mid]
-    return binary_search(h, needle)
+        return binary_search(haystack[:mid], needle)
 
 def binary_search_while(haystack, needle):
     if needle > haystack[-1] or needle < haystack[0]:
@@ -34,5 +33,5 @@ def binary_search_while(haystack, needle):
 
 arr = range(1,100000)
 
-print binary_search_while(arr, 55)
+#print binary_search_while(arr, 55)
 print binary_search(arr, 55)
