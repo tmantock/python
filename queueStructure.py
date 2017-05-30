@@ -18,7 +18,8 @@ class Queue:
 
     def enqueue(self, n):
         if self.count == self.max:
-            print "Max reached"
+            print "Max reached. Sorry %s" %n
+            print "\n"
             return
 
         self.count += 1
@@ -72,6 +73,12 @@ def testQue():
     que.enqueue("Jeremy")
     que.enqueue("Claire")
     que.enqueue("John")
+    que.enqueue("Peter")
+    que.enqueue("Melanie")
+    que.enqueue("Jennifer")
+    que.enqueue("Zoey")
+    que.enqueue("Barnes")
+    que.enqueue("Frank")
     que.traverse()
     print "\n \n"
     que.dequeue()
@@ -84,7 +91,7 @@ def testQue():
     que.dequeue()
 
     if que.offer():
-        que.enqueue("Troy")
+        que.enqueue("Frank")
 
     print "\n \n"
     que.traverse()
