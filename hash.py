@@ -55,22 +55,19 @@ class LinkedList:
             return
 
         n = self.head
-
         while n:
             if n.getKey() == key:
                 return (n.getKey(), n.getValue())
+
     def formatList(self):
         if self.head is None:
             return '[]'
         
         result = '['
-
         n = self.head
-
         while n:
             result = result + '{' + str(n.getKey()) + ' : ' + str(n.getValue()) + '},'
             n = n.getNext()
-
         return result[:-1] + ']'
 
     def __str__(self):
@@ -86,16 +83,17 @@ class HashTable:
 
     def element(self, i):
         return i % self.numBuckets
+
     def insert(self, key, value):
         self.buckets[self.element(key)].appendNode(key, value)
+
     def getElement(self, key):
         return self.buckets[self.element(key)].search(key)
+
     def __str__(self):
         result = '['
         for b in self.buckets:
             result = result + b.formatList() + ','
-        #     for e in b:
-        #         result = result + str(e[0]) + ':' + str(e[1]) + ','
         return result[:-1] + ']' #result[:-1] omits the last comma
 
 hash = HashTable(5)
