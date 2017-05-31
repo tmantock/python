@@ -49,7 +49,7 @@ class LinkedList:
                 previous = current
                 current = current.getNext()
 
-    def traverse(self):
+    def search(self, key):
         if self.head is None:
             print "List not set"
             return
@@ -57,8 +57,25 @@ class LinkedList:
         n = self.head
 
         while n:
-            print n.getValue()
+            if n.getKey() == key:
+                return (n.getKey(), n.getValue())
+    def formatList(self):
+        if self.head is None:
+            return '[]'
+        
+        result = '['
+
+        n = self.head
+
+        while n:
+            result = result + '{' + str(n.getKey()) + ' : ' + str(n.getValue()) + '},'
             n = n.getNext()
+
+        return result[:-1] + ']'
+
+    def __str__(self):
+        return self.formatList()
+        
 
 class HashTable:
     def __init__(self, numBuckets):
@@ -71,19 +88,18 @@ class HashTable:
         return i % self.numBuckets
     def insert(self, key, value):
         self.buckets[self.element(key)].appendNode(key, value)
-    def printTable(self):
-        print self.buckets
+    def getElement(self, key):
+        return self.buckets[self.element(key)].search(key)
     def __str__(self):
-        result = '{'
+        result = '['
         for b in self.buckets:
-            b.traverse()
+            result = result + b.formatList() + ','
         #     for e in b:
         #         result = result + str(e[0]) + ':' + str(e[1]) + ','
-        # return result[:-1] + '}' #result[:-1] omits the last comma
-        return "Printed"
+        return result[:-1] + ']' #result[:-1] omits the last comma
 
 hash = HashTable(5)
 hash.insert(1, "John")
-hash.printTable()
-#hash.insert(5, "John")
+hash.insert(1, "Claire")
+print hash.getElement(1)
 print hash
