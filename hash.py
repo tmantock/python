@@ -83,8 +83,12 @@ class HashTable:
 
     def hashFunc(self, key):
         hash = 7
-        for i in range(len(key)):
-            hash = hash + ord(key[i])
+
+        if type(key) is str:
+            for i in range(len(key)):
+                hash = hash + ord(key[i])
+        else:
+            hash = key
         return hash % self.numBuckets
 
     def insert(self, key, value):
