@@ -81,14 +81,17 @@ class HashTable:
         for i in range(numBuckets):
             self.buckets.append(LinkedList())
 
-    def element(self, i):
-        return i % self.numBuckets
+    def hashFunc(self, key):
+        hash = 7
+        for i in range(len(key)):
+            hash = hash + ord(key[i])
+        return hash % self.numBuckets
 
     def insert(self, key, value):
-        self.buckets[self.element(key)].appendNode(key, value)
+        self.buckets[self.hashFunc(key)].appendNode(key, value)
 
     def getElement(self, key):
-        return self.buckets[self.element(key)].search(key)
+        return self.buckets[self.hashFunc(key)].search(key)
 
     def __str__(self):
         result = '['
@@ -97,10 +100,10 @@ class HashTable:
         return result[:-1] + ']' #result[:-1] omits the last comma
 
 def testhash():
-    hash = HashTable(5)
-    hash.insert(1, "John")
-    hash.insert(1, "Claire")
-    print hash.getElement(1)
+    hash = HashTable(10)
+    hash.insert("english", "John")
+    hash.insert("french", "Claire")
+    print hash.getElement("english")
     print hash
 
 testhash()
