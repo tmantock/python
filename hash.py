@@ -96,8 +96,11 @@ class HashTable:
             result = result + b.formatList() + ','
         return result[:-1] + ']' #result[:-1] omits the last comma
 
-hash = HashTable(5)
-hash.insert(1, "John")
-hash.insert(1, "Claire")
-print hash.getElement(1)
-print hash
+def testhash():
+    hash = HashTable(5)
+    hash.insert(1, "John")
+    hash.insert(1, "Claire")
+    print hash.getElement(1)
+    print hash
+
+testhash()
