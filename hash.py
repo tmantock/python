@@ -86,7 +86,7 @@ class HashTable:
 
         if type(key) is str:
             for i in range(len(key)):
-                hash = hash + ord(key[i])
+                hash = hash * 31 + ord(key[i])
         else:
             hash = key
         return hash % self.numBuckets
