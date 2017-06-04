@@ -33,12 +33,21 @@ class Node:
     def printInOrder(self):
         if self.left is not None:
             self.left.printInOrder()
-
         print self
-
         if self.right is not None:
             self.right.printInOrder()
-
+    def printPreOrder(self):
+        print self
+        if self.left is not None:
+            self.left.printPreOrder()
+        if self.right is not None:
+            self.right.printPreOrder()
+    def printPostOrder(self):
+        if self.left is not None:
+            self.left.printPreOrder()
+        if self.right is not None:
+            self.right.printPreOrder()
+        print self
     def __str__(self):
         return "( " + str(self.position) + ", " + str(self.data) + ")"
 
@@ -46,5 +55,10 @@ root = Node(5)
 root.insert(4)
 root.insert(7)
 root.insert(3)
-# print root.find(8)
+print root.find(8)
+print "```````````````````"
 root.printInOrder()
+print "```````````````````"
+root.printPreOrder()
+print "```````````````````"
+root.printPostOrder()
