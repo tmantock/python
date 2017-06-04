@@ -49,7 +49,7 @@ class DoublyLinkedList:
 
         current = self.head
 
-        while current.next is not None:
+        while current is not None:
             print current
             current = current.getNext()
 
