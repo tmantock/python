@@ -1,8 +1,10 @@
 class Node:
-    def __init__(self, data):
-        self.data = data;
-        self.leftChild = None;
-        self.rightChild = None;
+    def __init__(self, data, position = None):
+        self.data = data
+        self.leftChild = None
+        self.rightChild = None
+        self.position = position
+
     def setLeftChild(self, left):
         self.leftChild = left
     def setRigthChild(self, right):
@@ -13,42 +15,54 @@ class Node:
         return self.rightChild
     def getData(self):
         return self.data
+    def setData(self, data):
+        self.data = data
+    def setPosition(self, pos):
+        self.position = pos
+    def __str__(self):
+        return "( " + str(self.position) + ", " + str(self.data) + ")"
 
-class Tree:
+class BinarySearchTree:
     def __init__(self, data):
         self.root = Node(data)
     def search(self, data):
         return self.recurseSearch(self.root, data)
     def recurseSearch(self, node, data):
+        if node is None:
+            return
         if data == node.getData():
             return node
         if data > node.getData():
             return self.recurseSearch(node.getRight(), data)
         if data < node.getData():
             return self.recurseSearch(node.getLeft(), data)
-    def appendNode(self, data): 
+    def appendNode(self, data):
         self.recurseAppend(self.root, data)
-    def recurseAppend(self, node, data):
+    def recurseAppend(self, node, data, position = None):
         if node is None:
-            return Node(data)
+            return Node(data, position)
         if data > node.getData():
-            node.setRigthChild(self.recurseAppend(node.getRight(), data))
+            node.setRigthChild(self.recurseAppend(node.getRight(), data, 'Right'))
         if data < node.getData():
-            node.setLeftChild(self.recurseAppend(node.getLeft(), data))
-
+            node.setLeftChild(self.recurseAppend(node.getLeft(), data, 'Left'))
         return node
-    def traverseTree(self):
-        self.recurseTree(self.root)
-    def recurseTree(self, node):
+    def preOrderTraverseTree(self):
+        self.preOrderRecurseTree(self.root)
+    def preOrderRecurseTree(self, node):
         if node is not None:
-            print node.getData()
-            self.recurseTree(node.getLeft())
-            self.recurseTree(node.getRight())
+            print node
+            self.preOrderRecurseTree(node.getLeft())
+            self.preOrderRecurseTree(node.getRight())
+    def swap(self, node1, node2):
+        temp = node1.getData()
+        node1.setData(node2.getData())
+        node2.setData(temp)
 
-t = Tree(1)
+
+t = BinarySearchTree(1)
 t.appendNode(10)
 t.appendNode(3)
 t.appendNode(4)
-t.traverseTree()
-f = t.search(10)
-print f
+t.preOrderTraverseTree()
+# f = t.search(10)
+# print f
