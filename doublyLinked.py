@@ -42,7 +42,7 @@ class DoublyLinkedList:
     def printList(self):
         if self.head is None:
             return
-        
+
         current = self.head
 
         while current.next is not None:
