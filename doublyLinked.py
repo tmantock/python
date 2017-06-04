@@ -19,6 +19,7 @@ class Node:
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
+        self.tail = None
     def append(self, data):
         if self.head is None:
             self.head = Node(data)
@@ -29,7 +30,10 @@ class DoublyLinkedList:
         while current.getNext() is not None:
             current = current.getNext()
 
-        current.setNext(Node(data, current))
+        node = Node(data, current)
+        current.setNext(node)
+        self.tail = node
+
     def push(self, data):
         if self.head is None:
             self.head = Node(data)
