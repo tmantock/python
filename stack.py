@@ -12,6 +12,10 @@ class Node:
 class Stack:
     def __init__(self):
         self.head = None
+    """
+    Insert nodes to the top of the Stack
+    Cannot be inserted at the end
+    """
     def push(self, data):
         head = self.head
         node = Node(data)
@@ -22,6 +26,9 @@ class Stack:
 
         node.setNext(head)
         self.head = node
+    """
+    Pull nodes off the top of the stack
+    """
     def pop(self):
         if self.head is None:
             return
@@ -31,8 +38,14 @@ class Stack:
         self.head = next
 
         return head
+    """
+    See the first node in the Stack
+    """
     def peek(self):
         return self.head
+    """
+    Print the nodes in a stack
+    """
     def showStack(self):
         if self.head is None:
             return
