@@ -21,18 +21,17 @@ class DoublyLinkedList:
         self.head = None
         self.tail = None
     def append(self, data):
+        node = Node(data)
         if self.head is None:
-            self.head = Node(data)
+            self.head = node
             return
 
-        current = self.head
-
-        while current.getNext() is not None:
-            current = current.getNext()
-
-        node = Node(data, current)
-        current.setNext(node)
-        self.tail = node
+        if self.tail is not None:
+            self.tail.setNext(node)
+            self.tail = node
+        else:
+            self.head.setNext(node)
+            self.tail = node
 
     def push(self, data):
         if self.head is None:

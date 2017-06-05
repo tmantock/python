@@ -66,3 +66,28 @@ print "================"
 s.pop()
 s.showStack()
 print "================"
+
+def reverse(x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        res = 0
+
+        m = 1
+
+        if x < 0:
+            x = x * -1
+            m = -1
+        
+        while x:
+            res = res * 10
+            res = res + x % 10
+            x /= 10
+        
+        if -2147483648 <= res <= 2147483648:
+            return m * res
+        
+        return 0
+
+print reverse(-4353532)
