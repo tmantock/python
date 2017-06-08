@@ -61,3 +61,21 @@ print "--------------------"
 dl.push(55)
 print "--------------------"
 dl.printList()
+
+
+def removeDuplicates(nums = [1,1,1]):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        x = 1
+        for i in range(len(nums)):
+            if x >= len(nums):
+                x = len(nums) - 1
+            if len(nums) > 1 and i < len(nums) and i != x and nums[i] == nums[x]:
+                nums.remove(nums[i])
+            x += 1
+        
+        return len(nums)
+
+print removeDuplicates()
