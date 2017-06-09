@@ -1,3 +1,5 @@
+#Palindrom Permutation Question from CTCI
+
 def permutationPalindrome(string):
     if string is None:
         return False
