@@ -103,7 +103,7 @@ class MinHeap:
     def removeMin(self):
         if self.root is None or self.last is None:
             return
-        node = self.root
+        node = self.root.getData()
         self.root.setData(self.last.getData())
         self.last.getParent().removeChild(self.last)
         self.heapifyDown(self.root)
@@ -120,7 +120,7 @@ def testHeap():
     h.append(8)
     h.append(9)
     h.append(1)
-    # h.append(16)
+    h.append(16)
     h.traverse()
     h.removeMin()
     print "--------------"
