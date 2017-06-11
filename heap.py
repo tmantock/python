@@ -84,7 +84,7 @@ class MinHeap:
         ch = node.getChildren()
         if len(ch) == 1:
             left = ch[0]
-            if node.getParent() < left.getData():
+            if node.getData() < left.getData():
                 return
             else:
                 self.swap(node, left)
