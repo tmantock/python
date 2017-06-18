@@ -1,4 +1,3 @@
-##Recurssion
 class Node:
     def __init__(self, data):
         self.data = data
@@ -75,7 +74,7 @@ def isPal(s):
     else:
         return s[0] == s[-1] and isPal(s[1:-1])
 
-def isPalindrome(s):
+def IsPalindrome(s):
     """Returns True if s is a palindrome and False otherwise"""
     return isPal(toChars(s))
 
