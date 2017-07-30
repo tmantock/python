@@ -33,6 +33,7 @@ class Node:
     def __str__(self):
         return "I am " + str(self.data) + " Parent is " + str(self.parent.data if self.parent is not None else None)
 
+# As a tree
 class MinHeap:
     def __init__(self, root):
         self.root = Node(root)
@@ -127,3 +128,50 @@ def testHeap():
     h.traverse()
 
 testHeap()
+
+# With array
+class MaxHeap(object):
+    def __init__(self):
+        self.heap = [1,2,3,4,5,6,7,8,9]
+    def heapSize(self):
+        return len(self.heap)
+    def left(self, index):
+        left = 2 * index + 1
+
+        if left < self.heapSize():
+            return left
+        else:
+            return -1
+    def right(self, index):
+        right = 2 * index + 2
+
+        if right < self.heapSize():
+            return right
+        else:
+            return -1
+    def parent(self, index):
+        parent = (index - 1)/2
+        if parent == 0:
+            return -1
+        else:
+            return parent
+    def heapify(self):
+        i = self.heapSize() - 1
+        while i >= 0:
+            self.max_heapify(i)
+            i -= 1
+    def max_heapify(self, index):
+        left = self.left(index)
+        right = self.right(index)
+
+        if left >= 0 and right >= 0 and self.heap[left] < self.heap[right]:
+            left = right
+        if left > 0 and self.heap[index] < self.heap[left]:
+            self.heap[index], self.heap[left] = self.heap[left], self.heap[index]
+            self.max_heapify(left)
+    def print_heap(self):
+        print self.heap
+
+h = MaxHeap()
+h.heapify()
+h.print_heap()
