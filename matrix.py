@@ -52,7 +52,7 @@ class Matrix(object):
         elif type(rhs) is Matrix:
             return self._multiply(rhs)
         
-        return None
+        raise ValueError("A Matrix can only be multiplied by a Matrix or an int")
 
     def __rmul__(self, lhs):
         if type(lhs) is int:
@@ -60,8 +60,39 @@ class Matrix(object):
         elif type(lhs) is Matrix:
             return self._multiply(lhs)
         
-        return None
+        raise ValueError("A Matrix can only be multiplied by a Matrix or an int")        
 
+    def __add__(self, rhs):
+        if type(rhs) is not Matrix:
+            raise ValueError("Two Matrices are required for addition")
+        elif self.size() != rhs.size():
+            raise ValueError("Both Matrices must have the same size")
+        
+        return self._add(rhs)
+    
+    def __radd__(self, lhs):
+        if type(lhs) is not Matrix:
+            raise ValueError("Two Matrices are required for addition")
+        elif self.size() != lhs.size():
+            raise ValueError("Both Matrices must have the same size")
+        
+        return self._add(lhs, True)
+
+    def __sub__(self, rhs):
+        if type(rhs) is not Matrix:
+            raise ValueError("Two Matrices are required for subtraction")
+        elif self.size() != rhs.size():
+            raise ValueError("Both Matrices must have the same size")
+        
+        return self._sub(rhs)
+    
+    def __rsub__(self, lhs):
+        if type(lhs) is not Matrix:
+            raise ValueError("Two Matrices are required for subtraction")
+        elif self.size() != lhs.size():
+            raise ValueError("Both Matrices must have the same size")
+        
+        return self._sub(lhs, True)
 
     def size(self):
         """
@@ -117,7 +148,7 @@ class Matrix(object):
         return (len(matrix), len(matrix[0]))
 
     def _transposed(self):
-        transposed, rows, cols = [], len(self._container), len(self._container[0])
+        transposed, (rows, cols) = [], self.size()
 
         for i in range(cols):
             row = []
@@ -132,7 +163,7 @@ class Matrix(object):
         Method transposes the matrix in place
         """
 
-        rows, cols = len(self._container), len(self._container[0])
+        (rows, cols) = self.size()
 
         for i in range(rows):
             for j in range(i + 1, cols):
@@ -173,7 +204,7 @@ class Matrix(object):
         elif size_l[0] == size_r[1]:
             left, right = rhs, self
         else:
-            return None
+            raise ValueError("The columns lenght of Matrix 1 must be the same as the row length of Matrix 2")
         
         right_transposed = right.transposed()
 
@@ -185,7 +216,7 @@ class Matrix(object):
             
             result.append(new_row)
         
-        return result
+        return Matrix(result)
     
     def _dot_product(self, lhs, rhs):
         product = 0
@@ -197,9 +228,13 @@ class Matrix(object):
             product += lhs[i] * rhs[i]
         
         return product
+    
+    def _add(self, rhs, left = False):
+        (rows, cols) = self.size()
 
+        return Matrix([[rhs[i][j] + self._container[i][j] if left else self._container[i][j] + rhs[i][j] for j in range(cols)] for i in range(rows)])
+    
+    def _sub(self, rhs, left = False):
+        (rows, cols) = self.size()
 
-m1 = Matrix([[3,4,2]])
-m2 = Matrix([[13,9,7,15],[8,7,4,6],[6,4,0,3]])
-
-print(5 * m1)
+        return Matrix([[rhs[i][j] - self._container[i][j] if left else self._container[i][j] - rhs[i][j] for j in range(cols)] for i in range(rows)])
