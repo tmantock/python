@@ -45,6 +45,23 @@ class Matrix(object):
         string += "]"
 
         return string
+    
+    def __mul__(self, rhs):
+        if type(rhs) is int:
+            return [[x * rhs for x in row] for row in self._container]
+        elif type(rhs) is Matrix:
+            return self._multiply(rhs)
+        
+        return None
+
+    def __rmul__(self, lhs):
+        if type(lhs) is int:
+            return [[x * lhs for x in row] for row in self._container]
+        elif type(lhs) is Matrix:
+            return self._multiply(lhs)
+        
+        return None
+
 
     def size(self):
         """
@@ -68,15 +85,14 @@ class Matrix(object):
 
 
     def transpose(self):
-        """
-        Method transposes the matrix in place
-        """
+        if self.is_square():
+            self._transpose_in_place()
+            return
+        
+        self._container = self._transposed()
 
-        rows, cols = len(self._container), len(self._container[0])
-
-        for i in range(rows):
-            for j in range(i + 1, cols):
-                self._container[i][j], self._container[j][i] = self._container[j][i], self._container[i][j]
+    def transposed(self):
+        return self._transposed()
 
     def determinant(self):
         """
@@ -99,6 +115,28 @@ class Matrix(object):
             return (0, 0)
 
         return (len(matrix), len(matrix[0]))
+
+    def _transposed(self):
+        transposed, rows, cols = [], len(self._container), len(self._container[0])
+
+        for i in range(cols):
+            row = []
+            for j in range(rows):
+                row.append(self._container[j][i])
+            transposed.append(row)
+        
+        return transposed
+    
+    def _transpose_in_place(self):
+        """
+        Method transposes the matrix in place
+        """
+
+        rows, cols = len(self._container), len(self._container[0])
+
+        for i in range(rows):
+            for j in range(i + 1, cols):
+                self._container[i][j], self._container[j][i] = self._container[j][i], self._container[i][j]
 
 
     def _determinant(self, matrix):
@@ -123,3 +161,45 @@ class Matrix(object):
                 determinant -= element * self._determinant(temp_matrix)
         
         return determinant
+
+    def _multiply(self, rhs):
+        size_l = self.size()
+        size_r = rhs.size()
+
+        right, left, result = None, None, []
+
+        if size_l[1] == size_r[0]:
+            left, right = self, rhs
+        elif size_l[0] == size_r[1]:
+            left, right = rhs, self
+        else:
+            return None
+        
+        right_transposed = right.transposed()
+
+        for l_row in left:
+            new_row = []
+
+            for r_row in right_transposed:
+                new_row.append(self._dot_product(l_row, r_row))
+            
+            result.append(new_row)
+        
+        return result
+    
+    def _dot_product(self, lhs, rhs):
+        product = 0
+
+        if len(lhs) != len(rhs):
+            return product
+        
+        for i in range(len(lhs)):
+            product += lhs[i] * rhs[i]
+        
+        return product
+
+
+m1 = Matrix([[3,4,2]])
+m2 = Matrix([[13,9,7,15],[8,7,4,6],[6,4,0,3]])
+
+print(5 * m1)
