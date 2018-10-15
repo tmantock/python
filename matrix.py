@@ -1,37 +1,43 @@
 # Matrix Class for implementing a classic Matrix
 class Matrix(object):
     def __init__(self, matrix):
+        """Class initializer
+        
+        Arguments:
+            matrix {List[Integer]} -- The list of lists to use to create the matrix
         """
-        Initialzer
 
-        @param matrix: A list of lists
-        """
         self._container = matrix
 
     def __getitem__(self, key):
+        """Method allows [] operator to be used for accessing an item
+        
+        Arguments:
+            key {Integer} -- the list index
+        
+        Returns:
+            List[Integer] -- the row of the matrix
         """
-        Method allows [] operator to be used for accessing an item
 
-        @param key: The index of the matrix
-        @return [Type]
-        """
         return self._container[key]
 
     def __setitem__(self, key, value):
+        """Method allows [] operator to be used for setting an index in the array
+        
+        Arguments:
+            key {Integer} -- the list index
+            value {List[Integer]} -- a row for the matrix
         """
-        Method allows [] operator to be used for setting an index in the array
 
-        @param key: the index of matrix
-        @param value: the value to set to the index
-        """
         self._container[key] = value
 
     def __str__(self):
+        """Method returns a string that can be used in print or str()
+        
+        Returns:
+            String -- the string representation of a matrix
         """
-        Method returns a string that can be used in print or str()
 
-        @return String
-        """
         string = "[\n"
 
         for item in self._container:
@@ -47,6 +53,17 @@ class Matrix(object):
         return string
     
     def __mul__(self, rhs):
+        """Method overrides the "*" operator
+        
+        Arguments:
+            rhs {Matrix or Integer} -- the matrix or integer to multiply by
+        
+        Raises:
+            ValueError -- The other object must be a matrix or an integer
+        
+        Returns:
+            Matrix -- The resulting matrix
+        """
         if type(rhs) is int:
             return [[x * rhs for x in row] for row in self._container]
         elif type(rhs) is Matrix:
@@ -55,6 +72,18 @@ class Matrix(object):
         raise ValueError("A Matrix can only be multiplied by a Matrix or an int")
 
     def __rmul__(self, lhs):
+        """Method overrides the "*" operator
+        
+        Arguments:
+            lhs {Matrix or Integer} -- the matrix or integer to multiply by
+        
+        Raises:
+            ValueError -- The other object must be a matrix or an integer
+        
+        Returns:
+            Matrix -- The resulting matrix
+        """
+
         if type(lhs) is int:
             return [[x * lhs for x in row] for row in self._container]
         elif type(lhs) is Matrix:
@@ -63,6 +92,18 @@ class Matrix(object):
         raise ValueError("A Matrix can only be multiplied by a Matrix or an int")        
 
     def __add__(self, rhs):
+        """Method overrides the "+" operator
+        
+        Arguments:
+            rhs {Matrix} -- The other matrix
+        
+        Raises:
+            ValueError -- Both objects must be matrix
+            ValueError -- Both matrices must have the same size
+        
+        Returns:
+            Matrix -- The resulting matrix
+        """
         if type(rhs) is not Matrix:
             raise ValueError("Two Matrices are required for addition")
         elif self.size() != rhs.size():
@@ -71,6 +112,18 @@ class Matrix(object):
         return self._add(rhs)
     
     def __radd__(self, lhs):
+        """Method overrides the "+" operator
+        
+        Arguments:
+            lhs {Matrix} -- The other matrix
+        
+        Raises:
+            ValueError -- Both objects must be matrix
+            ValueError -- Both matrices must have the same size
+        
+        Returns:
+            Matrix -- The resulting matrix
+        """
         if type(lhs) is not Matrix:
             raise ValueError("Two Matrices are required for addition")
         elif self.size() != lhs.size():
@@ -79,6 +132,19 @@ class Matrix(object):
         return self._add(lhs, True)
 
     def __sub__(self, rhs):
+        """Method overrides the "-" operator
+        
+        Arguments:
+            rhs {Matrix} -- The other matrix
+        
+        Raises:
+            ValueError -- Both objects must be matrix
+            ValueError -- Both matrices must have the same size
+        
+        Returns:
+            Matrix -- The resulting matrix
+        """
+
         if type(rhs) is not Matrix:
             raise ValueError("Two Matrices are required for subtraction")
         elif self.size() != rhs.size():
@@ -87,6 +153,19 @@ class Matrix(object):
         return self._sub(rhs)
     
     def __rsub__(self, lhs):
+        """Method overrides the "-" operator
+        
+        Arguments:
+            lhs {Matrix} -- The other matrix
+        
+        Raises:
+            ValueError -- Both objects must be matrix
+            ValueError -- Both matrices must have the same size
+        
+        Returns:
+            Matrix -- The resulting matrix
+        """
+
         if type(lhs) is not Matrix:
             raise ValueError("Two Matrices are required for subtraction")
         elif self.size() != lhs.size():
@@ -95,19 +174,21 @@ class Matrix(object):
         return self._sub(lhs, True)
 
     def size(self):
+        """Method returns the size of the matrix
+        
+        Returns:
+            Tuple(Integer, Integer) -- a tuple containing the size (row, col)
         """
-        Method returns the size of the matrix
 
-        @return (Int, Int)
-        """
         return self._size(self._container)
 
     def is_square(self):
+        """Method returns a boolean indicating if the matrix is square
+        
+        Returns:
+            Boolean -- indicate if the matrix is square
         """
-        Method returns a boolean indicating if the matrix is square
 
-        @return Boolean
-        """
 
         if (len(self._container)) == 0:
             return False
@@ -116,6 +197,9 @@ class Matrix(object):
 
 
     def transpose(self):
+        """Method transposes the matrix
+        """
+
         if self.is_square():
             self._transpose_in_place()
             return
@@ -123,31 +207,48 @@ class Matrix(object):
         self._container = self._transposed()
 
     def transposed(self):
+        """Method returns a transposed version of the matrix
+        
+        Returns:
+            Matrix -- the transposed matrix
+        """
+
         return self._transposed()
 
     def determinant(self):
+        """Method returns the determinant of a matrix
+        
+        Returns:
+            Integer -- the determinant
         """
-        Method returns the determinant of a matrix
 
-        @return Int
-        """
 
         if not self.is_square(): return
 
         return self._determinant(self._container)
 
     def _size(self, matrix):
+        """Method helps to find the size of a matrix
+        
+        Arguments:
+            matrix {Matrix} -- the matrix to work on
+        
+        Returns:
+            Tuple(Integer, Integer) -- a tuple containing the size (row, col)
         """
-        Method helps to find the size of a matrix
 
-        @return (Int, Int)
-        """
         if len(matrix) == 0:
             return (0, 0)
 
         return (len(matrix), len(matrix[0]))
 
     def _transposed(self):
+        """Method returns a transposed matrix
+        
+        Returns:
+            List[List[Integer]] -- the transposed matrix lists
+        """
+
         transposed, (rows, cols) = [], self.size()
 
         for i in range(cols):
@@ -159,9 +260,9 @@ class Matrix(object):
         return transposed
     
     def _transpose_in_place(self):
+        """Mehtod transposes a matrix in place (the matrix must be square)
         """
-        Method transposes the matrix in place
-        """
+
 
         (rows, cols) = self.size()
 
@@ -171,10 +272,13 @@ class Matrix(object):
 
 
     def _determinant(self, matrix):
-        """
-        Method helps to find the determinant of a matrix
-
-        @return Int
+        """Method helps to find the determinant of a matrix
+        
+        Arguments:
+            matrix {Matrix} -- the matrix to work on
+        
+        Returns:
+            Integer -- the determinant
         """
 
         if self._size(matrix) == (2, 2):
@@ -194,6 +298,19 @@ class Matrix(object):
         return determinant
 
     def _multiply(self, rhs):
+        """Method multiplies the current Matrix with another Matrix.
+        Order doesn't matter, since multiplication is commutative
+        
+        Arguments:
+            rhs {Matrix} -- The matrix to multiply with
+        
+        Raises:
+            ValueError -- Matrix size mismatch
+        
+        Returns:
+            Matrix -- The Matrix resulting from multiplication
+        """
+
         size_l = self.size()
         size_r = rhs.size()
 
@@ -219,6 +336,16 @@ class Matrix(object):
         return Matrix(result)
     
     def _dot_product(self, lhs, rhs):
+        """Method returns the dot product of two arrays (Multiplying corresponding indices of the arrays and getting the sum of the products)
+        
+        Arguments:
+            lhs {List[Integer]} -- The list of numbers
+            rhs {List[Integer]} -- The list of numbers
+        
+        Returns:
+            Integer -- The resulting dot product
+        """
+
         product = 0
 
         if len(lhs) != len(rhs):
@@ -230,11 +357,35 @@ class Matrix(object):
         return product
     
     def _add(self, rhs, left = False):
+        """Method adds two matrices together
+        
+        Arguments:
+            rhs {Matrix} -- The other Matrix
+        
+        Keyword Arguments:
+            left {bool} -- Flag indicating if the current Matrix is on the left hand side of the operator (order matters) (default: {False})
+        
+        Returns:
+            Matrix -- The resulting Matrix
+        """
+
         (rows, cols) = self.size()
 
         return Matrix([[rhs[i][j] + self._container[i][j] if left else self._container[i][j] + rhs[i][j] for j in range(cols)] for i in range(rows)])
     
     def _sub(self, rhs, left = False):
+        """Method subtracts two matrices
+        
+        Arguments:
+            rhs {Matrix} -- The other matrix
+        
+        Keyword Arguments:
+            left {bool} -- Flag indicating if the current Matrix is on the left hand side of the operator (order matters) [description] (default: {False})
+        
+        Returns:
+            Matrix -- The resulting Matrix from subtraction
+        """
+
         (rows, cols) = self.size()
 
         return Matrix([[rhs[i][j] - self._container[i][j] if left else self._container[i][j] - rhs[i][j] for j in range(cols)] for i in range(rows)])
