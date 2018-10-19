@@ -181,6 +181,15 @@ class Matrix(object):
         """
 
         return self._size(self._container)
+    
+    def is_empty(self):
+        """Method checks if a Matrix is empty
+
+        Returns:
+            Boolean -- an indication if the matrix is empty
+        """
+
+        return self.size() == (0,0)
 
     def is_square(self):
         """Method returns a boolean indicating if the matrix is square
@@ -389,3 +398,68 @@ class Matrix(object):
         (rows, cols) = self.size()
 
         return Matrix([[rhs[i][j] - self._container[i][j] if left else self._container[i][j] - rhs[i][j] for j in range(cols)] for i in range(rows)])
+
+    def _get_column(self, index):
+        """Method returns a vector of values for a column in a matrix
+        
+        Arguments:
+            index {Integer} -- the column that should be returned
+        
+        Raises:
+            ValueError -- Index out of range for the column specified in the matrix
+        
+        Returns:
+            List[Integer] -- a vector of column values
+        """
+
+        if index >= self.size()[1]:
+            raise ValueError("Index out of range for column")
+
+        return [row[index] for row in self._container]
+
+# Rotation Matrix Class
+class RotationMatrix(Matrix):
+    def x_vec(self):
+        """Method returns a vector of the x axis values for the rotation matrix
+        
+        Raises:
+            ValueError -- X axis values are missing from the matrix
+        
+        Returns:
+            List[Integer] -- The vector of x-axis values
+        """
+
+        if self.is_empty() or self.size()[1] < 1:
+            raise ValueError("No X Axis available")
+
+        return self._get_column(0)
+
+    def y_vec(self):
+        """Method returns a vector of the y axis values for the rotation matrix
+        
+        Raises:
+            ValueError -- Y axis values are missing from the matrix
+        
+        Returns:
+            List[Integer] -- The vector of y-axis values
+        """
+
+        if self.is_empty() or self.size()[1] < 2:
+            raise ValueError("No Y Axis available")
+
+        return self._get_column(1)
+
+    def z_vec(self):
+        """Method returns a vector of the z axis values for the rotation matrix
+        
+        Raises:
+            ValueError -- Z axis values are missing from the matrix
+        
+        Returns:
+            List[Integer] -- The vector of z-axis values
+        """
+
+        if self.is_empty() or self.size()[1] < 3:
+            raise ValueError("No Z Axis available")
+
+        return self._get_column(2)
